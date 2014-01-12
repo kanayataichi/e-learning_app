@@ -1,0 +1,18 @@
+<% provide(:title, '試験実施') %>
+<%= form_for @trial, :url => {:controller => 'trial', :action => 'start'} do |f| %>
+	<%= render 'shared/error_messages', info: notice, object: f.object %>
+	<%= f.hidden_field :id %>
+	<table>
+		<tr>
+			<th>どの試験区分について学習しますか？</th>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<th align="left">試験区分　</th>
+			<td><%= f.select(:test_category_id, @test_categories, {}, {:style=>"width:80px;margin-top:5px"} )%></td>
+		</tr>
+	</table>
+	<%= f.submit "スタート" %>
+<% end %>
+<%= button_to "メインメニューへ戻る", main_menu_index_path %>

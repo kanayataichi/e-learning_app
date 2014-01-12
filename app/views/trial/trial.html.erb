@@ -1,0 +1,60 @@
+<% provide(:title, '試験実施') %>
+<%= form_tag trial_next_path do %>
+    <%= hidden_field_tag 'test_category_id', @problem.test_category_id %>
+    <%= hidden_field_tag 'problem_no', @problem.problem_no %>
+    <%= hidden_field_tag 'model_answer', @problem.model_answer, {:id=> 'model_answer'} %>
+	<table>
+		<tr>
+			<th align="left">問題<%= @problem.problem_no %></th>
+		</tr>
+		<tr>
+			<th align="left"><%= @problem.problem_content %></th>
+		</tr>
+	</table>
+	<table style="margin-top:10px;">
+		<tr>
+			<th align="left">１: <%= @problem.answer_candidate1 %></th>
+		</tr>
+		<tr>
+			<th align="left">２: <%= @problem.answer_candidate2 %></th>
+		</tr>
+		<tr>
+			<th align="left">３: <%= @problem.answer_candidate3 %></th>
+		</tr>
+		<tr>
+			<th align="left">４: <%= @problem.answer_candidate4 %></th>
+		</tr>
+	</table>
+	<table style="margin-top:10px;">
+		<tr>
+			<td>
+				１: <%= radio_button_tag 'answer_content', '1', checked = true, {:style=>"margin-bottom:5px"} %>&nbsp;&nbsp;
+				２: <%= radio_button_tag 'answer_content', '2', checked = false, {:style=>"margin-bottom:5px"} %>&nbsp;&nbsp;
+				３: <%= radio_button_tag 'answer_content', '3', checked = false, {:style=>"margin-bottom:5px"} %>&nbsp;&nbsp;
+				４: <%= radio_button_tag 'answer_content', '4', checked = false, {:style=>"margin-bottom:5px"} %>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<input type="button" value="解答" onClick="disp_result(document);"/>
+	<%= submit_tag "次の問題へ", :url => {:controller => "trial", :action => "next"} %>
+	
+	<div id="win" style="display:none;">
+		<br/>
+		<div style="color:red;">正解です。</div>
+	</div>
+	<div id="lose" style="display:none;">
+		<br/>
+		<div style="color:red;">不正解です。</div>
+		<br/>
+		<table>
+			<tr>
+				<th align="left">解説</th>
+			</tr>
+			<tr>
+				<th align="left"><%= @problem.commentary %></th>
+			</tr>
+		</table>
+	</div>
+<% end %>
+<%= button_to "メインメニューへ戻る", main_menu_index_path %>

@@ -1,0 +1,47 @@
+<% provide(:title, 'ユーザマスタメンテナンス') %>
+<%= form_for @user, :url => {:controller => 'user', :action => 'new'} do |f| %>
+	<%= render 'shared/error_messages', info: notice, object: f.object %>
+	<%= f.hidden_field :id %>
+	<table>
+		<tr>
+			<th align="left">ユーザID</th>
+			<td><%=f.text_field :user_id, :style => "width:100px;" %></td>
+		</tr>
+		<tr>
+			<th align="left">ユーザ名称</th>
+			<td><%=f.text_field :user_name, :style => "width:100px;" %></td>
+		</tr>
+		<tr>
+			<th align="left">パスワード</th>
+			<td><%=f.password_field :password, :style => "width:100px;" %></td>
+		</tr>
+		<tr>
+			<th align="left">パスワード再確認</th>
+			<td><%=f.password_field :password_confirmation, :style => "width:100px;" %></td>
+		</tr>
+	</table>
+	<br/>
+	<%= f.submit "更新" %>
+<% end %>
+<table border="1" style="margin-top:10px">
+	<tr style="background-color:#FFA500">
+		<th colspan="4">ユーザ一覧</th>
+	</tr>
+	<tr style="background-color:#FFA500">
+		<th width="100px">ユーザID</th>
+		<th width="150px">ユーザ名称</th>
+		<th width="50px"></th>
+		<th width="50px"></th>
+	</tr>
+	<% @users.each_with_index do |user, i| %>
+	<tr style=<%= (i%2==0) ? "background-color:#F5F5DC" : "background-color:#F0E68C" %>>
+		<td><%= user.user_id %></td>
+		<td><%= user.user_name %></td>
+		<td><%= link_to "更新", user_update_path(:id => user.id) %></td>
+		<td><%= link_to '削除', user_destory_path(:user_id => user.user_id) %></td>
+	</tr>
+	<% end %>
+</table>
+<%= will_paginate @users, :previous_label=>'«前', :next_label=>'次»' %> 
+<br/>
+<%= button_to "メインメニューへ戻る", main_menu_index_path %>

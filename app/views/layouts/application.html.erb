@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>e-ラーニングシステム</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="back">
+<p class="title"><b><%= yield(:title) %></b></p>
+<table style="width:100%">
+	<tr>
+		<td>
+			<%= yield %>
+		</td>
+		<td width="60px" valign="top" style="text-align:right;">
+			<% if session["login"] == true then %>
+				<%= button_to "ログオフ", root_path %>
+			<% end %>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

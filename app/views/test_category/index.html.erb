@@ -1,0 +1,39 @@
+<% provide(:title, '試験区分マスタメンテナンス') %>
+<%= form_for @test_category, :url => {:controller => 'test_category', :action => 'new'} do |f| %>
+	<%= render 'shared/error_messages', info: notice, object: f.object %>
+	<%= f.hidden_field :id %>
+	<table>
+		<tr>
+			<th align="left">試験区分ID</th>
+			<td><%=f.text_field :test_category_id, :style => "width:100px;" %></td>
+		</tr>
+		<tr>
+			<th align="left">試験区分名称</th>
+			<td><%=f.text_field :test_category_content, :style => "width:100px;" %></td>
+		</tr>
+	</table>
+	<br/>
+	<%= f.submit "更新" %>
+<% end %>
+<table border="1" style="margin-top:10px">
+	<tr style="background-color:#FFA500">
+		<th colspan="4">試験区分一覧</th>
+	</tr>
+	<tr style="background-color:#FFA500">
+		<th width="100px">試験区分</th>
+		<th width="150px">試験区分名称</th>
+		<th width="50px"></th>
+		<th width="50px"></th>
+	</tr>
+	<% @test_categories.each_with_index do |test_category, i| %>
+	<tr style=<%= (i%2==0) ? "background-color:#F5F5DC" : "background-color:#F0E68C" %>>
+		<td><%= test_category.test_category_id %></td>
+		<td><%= test_category.test_category_content %></td>
+		<td><%= link_to "更新", test_category_update_path(:test_category_id => test_category.test_category_id) %></td>
+		<td><%= link_to '削除', test_category_destory_path(:test_category_id => test_category.test_category_id) %></td>
+	</tr>
+	<% end %>
+</table>
+<%= will_paginate @test_categories, :previous_label=>'«前', :next_label=>'次»' %>
+<br/>
+<%= button_to "メインメニューへ戻る", main_menu_index_path %>

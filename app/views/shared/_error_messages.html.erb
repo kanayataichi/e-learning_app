@@ -1,0 +1,14 @@
+<div style="color:red">
+
+  <!-- 情報メッセージを表示 -->
+  <%= "* #{info}" unless info.blank? %>
+  
+  <!-- エラーメッセージを表示 -->
+  <% if object.errors.any? %>
+    <% object.errors.full_messages.each do |msg| %>
+      * <%= msg %>
+      <br/>
+    <% end %>
+    <br/>
+  <% end %>
+</div>

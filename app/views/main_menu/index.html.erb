@@ -1,0 +1,17 @@
+<% provide(:title, 'メインメニュー') %>
+<u><font size="3"><b>★マスタ管理★</b></font></u>
+</br></br>
+<oi>
+	<li><%= link_to "ユーザマスタメンテナンス", :controller => "user", :action => "index" %></li>
+	</br>
+	<li><%= link_to "試験区分マスタメンテナンス", :controller => "test_category", :action => "index" %></li>
+	</br>
+</oi>
+<u><font size="3"><b>★試験問題作成・実施★</b></font></u>
+</br></br>
+<oi>
+	<li><%= link_to "試験問題作成", :controller => "problem", :action => "index" %></li>
+	</br>
+	<li><%= link_to "試験実施", :controller => "trial", :action => "index" %></li>
+	</br>
+</oi>
